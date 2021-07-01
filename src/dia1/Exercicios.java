@@ -71,7 +71,7 @@ public class Exercicios {
 
         System.out.print("Digite o total de votos brancos: ");
         if(!sc.hasNextInt()){
-            System.out.println("Você não digitou um valor válido, encerrendo o programa....");
+            System.out.println("Você não digitou um valor válido, encerrando o programa....");
             System.exit(1);
         }
         int brancos = sc.nextInt();
