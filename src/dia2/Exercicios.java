@@ -1,7 +1,5 @@
 package dia2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Exercicios {
@@ -63,11 +61,7 @@ public class Exercicios {
 
         System.out.print("Digite a idade do nadador: ");
 
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
-            System.exit(1);
-        }
+        validadaSystemIn(sc);
 
         int idade = sc.nextInt();
 
@@ -96,20 +90,12 @@ public class Exercicios {
 
         System.out.print("Digite o primeiro número inteiro: ");
 
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
-            System.exit(1);
-        }
+        validadaSystemIn(sc);
         int n1 = sc.nextInt();
 
         System.out.print("Digite o segundo número inteiro: ");
 
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
-            System.exit(1);
-        }
+        validadaSystemIn(sc);
         int n2 = sc.nextInt();
 
         System.out.println("\nMétodo que determina o MENOR");
@@ -130,7 +116,39 @@ public class Exercicios {
             System.out.println("O número " + n2 + " é MAIOR do que o número " + n1);
         }
 
+        System.out.println("\nForma que o professor fez:");
+        if (n1 == n2) {
+            System.out.println("Os número são iguais");
+        } else {
+            System.out.println(n1 > n2 ? "O primeiro número é maior" : "O segundo número é maior");
+        }
+
         sc.close();
+    }
+
+    public static void exercicio3Alternativo() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Digite o primeiro número inteiro: ");
+
+        validadaSystemIn(sc);
+        int n1 = sc.nextInt();
+
+        System.out.print("Digite o segundo número inteiro: ");
+
+        validadaSystemIn(sc);
+        int n2 = sc.nextInt();
+
+        System.out.println("\nForma que o professor fez:");
+        if (n1 == n2) {
+            System.out.println("Os número são iguais");
+        } else {
+            System.out.println(
+                    n1 > n2
+                            ? String.format("O primeiro número %d é maior que %d", n1, n2)
+                            : String.format("O primeiro número %d é maior que %d", n2, n1)
+            );
+        }
     }
 
     public static void exercicio4() {
@@ -145,12 +163,7 @@ public class Exercicios {
 
         for (int i = 0; i < numeros.length; i++) {
             System.out.printf("Digite o %d° número inteiro: ", (i + 1));
-
-            if (!sc.hasNextInt()) {
-                System.out.println("Você precisa informar um número do tipo inteiro");
-                sc.close();
-                System.exit(1);
-            }
+            validadaSystemIn(sc);
             numeros[i] = sc.nextInt();
         }
 
@@ -164,7 +177,7 @@ public class Exercicios {
             } else if (numeros[i] < numeroMenor) {
                 numeroMenor = numeros[i];
             }
-            somatoria = somatoria + numeros[i];
+            somatoria += numeros[i];
         }
 
         int media = somatoria / 10;
@@ -191,51 +204,38 @@ public class Exercicios {
         System.out.println("3 - Multiplicação");
         System.out.println("4 - Divisão");
 
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
-            System.exit(1);
-        }
+        validadaSystemIn(sc);
         int escolha = sc.nextInt();
 
         System.out.print("\nDigite o primeiro número: ");
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
-            System.exit(1);
-        }
-        int n1 = sc.nextInt();
+        validadaSystemInDouble(sc);
+        double n1 = sc.nextDouble();
 
         System.out.print("Digite o segundo número: ");
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
-            System.exit(1);
-        }
-        int n2 = sc.nextInt();
+        validadaSystemInDouble(sc);
+        double n2 = sc.nextDouble();
 
-        switch (escolha){
+        switch (escolha) {
             case 1:
-                int soma = n1 + n2;
-                System.out.println("\n" + n1 + " + " + n2 + " = " + soma  );
+                double soma = n1 + n2;
+                System.out.println("\n" + n1 + " + " + n2 + " = " + soma);
                 break;
             case 2:
-                int subtacao = n1 - n2;
-                System.out.println("\n" + n1 + " - " + n2 + " = " + subtacao  );
+                double subtacao = n1 - n2;
+                System.out.println("\n" + n1 + " - " + n2 + " = " + subtacao);
                 break;
             case 3:
-                int multiplicacao = n1 * n2;
-                System.out.println("\n" + n1 + " * " + n2 + " = " + multiplicacao  );
+                double multiplicacao = n1 * n2;
+                System.out.println("\n" + n1 + " * " + n2 + " = " + multiplicacao);
                 break;
             case 4:
-                if(n2 == 0){
+                if (n2 != 0) {
+                    double divisao = n1 / n2;
+                    System.out.println("\n" + n1 + " / " + n2 + " = " + divisao);
+                } else {
                     System.out.println("\nNão é possível dividir por zero");
-                    break;
-                }else{
-                    int divisao = n1/n2;
-                    System.out.println("\n" + n1 + " / " + n2 + " = " + divisao  );
-                    break;
                 }
+                break;
         }
 
         sc.close();
@@ -255,11 +255,52 @@ public class Exercicios {
         System.out.println("2 - Papel");
         System.out.println("3 - Tesoura");
 
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
+        validadaSystemIn(sc);
+        int j1 = sc.nextInt();
+        if(j1 != 1 || j1 != 2 || j1 != 3){
+            System.out.println("Escolha uma opção válida!");
             System.exit(1);
         }
+
+        System.out.println("Jogador 2 digite: ");
+        System.out.println("1 - Pedra");
+        System.out.println("2 - Papel");
+        System.out.println("3 - Tesoura");
+
+        validadaSystemIn(sc);
+        int j2 = sc.nextInt();
+        if(j2 != 1 || j2 != 2 || j2 != 3){
+            System.out.println("Escolha uma opção válida!");
+            System.exit(1);
+        }
+
+        if (j1 == j2) {
+            System.out.println("Deu empate!");
+        }else if (j1 == 1 && j2 == 2 || j1 == 2 && j2 == 3 ||j1 == 3 && j2 == 1) {
+            System.out.println("Jogador 2 é o vencedor");
+        }else{
+            System.out.println("Jogador 1 é o vencedor");
+        }
+
+        sc.close();
+
+    }
+
+    public static void exercicio6Alternativa() {
+        //Faça a implementação do Jogo Pedra, Papel e Tesoura (Jokempô).
+        // O algoritmo deverá perguntar qual é a escolha do jogador 1
+        // (Pedra [pe], Papel [pa], Tesoura [t]) e deverá fazer o mesmo para o jogador 2.
+        // No final da execução o algoritmo deverá dizer qual é o jogador vencedor ou se houve empate.
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Bem vindo ao JOKEMPÔ");
+        System.out.println("Jogador 1 digite: ");
+        System.out.println("1 - Pedra");
+        System.out.println("2 - Papel");
+        System.out.println("3 - Tesoura");
+
+        validadaSystemIn(sc);
         int j1 = sc.nextInt();
 
         System.out.println("Jogador 2 digite: ");
@@ -267,39 +308,50 @@ public class Exercicios {
         System.out.println("2 - Papel");
         System.out.println("3 - Tesoura");
 
-        if (!sc.hasNextInt()) {
-            System.out.println("Você precisa informar um número do tipo inteiro");
-            sc.close();
-            System.exit(1);
-        }
+        validadaSystemIn(sc);
         int j2 = sc.nextInt();
 
-        //TODO tentar melhorar esses ifs
-
-        if(j1 == 1 && j2 == 2){
+        if (j1 == 1 && j2 == 2) {
             System.out.println("Papel vence pedra");
             System.out.println("Jogador 2 é o vencedor");
-        }else if(j1 == 1 && j2 == 3){
+        } else if (j1 == 1 && j2 == 3) {
             System.out.println("Pedra vence tesoura");
             System.out.println("Jogador 1 é o vencedor");
-        }else if(j1 == 2 && j2 == 1 ){
+        } else if (j1 == 2 && j2 == 1) {
             System.out.println("Papel vence pedra");
             System.out.println("Jogador 1 é o vencedor");
-        }else if(j1 == 2 && j2 == 3 ) {
+        } else if (j1 == 2 && j2 == 3) {
             System.out.println("Tesoura vence papel");
             System.out.println("Jogador 2 é o vencedor");
-        }else if(j1 == 3 && j2 == 1 ) {
+        } else if (j1 == 3 && j2 == 1) {
             System.out.println("Pedra vence tesoura");
             System.out.println("Jogador 2 é o vencedor");
-        }else if(j1 == 3 && j2 == 2 ) {
+        } else if (j1 == 3 && j2 == 2) {
             System.out.println("Tesoura vence papel");
             System.out.println("Jogador 1 é o vencedor");
-        }else{
+        } else {
             System.out.println("Houve um empate");
         }
 
         sc.close();
 
+    }
+
+
+    public static void validadaSystemIn(Scanner sc) {
+        if (!sc.hasNextInt()) {
+            System.out.println("Você precisa informar um número do tipo inteiro");
+            sc.close();
+            System.exit(1);
+        }
+    }
+
+    public static void validadaSystemInDouble(Scanner sc) {
+        if (!sc.hasNextDouble()) {
+            System.out.println("Você precisa informar um número");
+            sc.close();
+            System.exit(1);
+        }
     }
 
 
