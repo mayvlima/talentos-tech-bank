@@ -157,27 +157,29 @@ public class Exercicios {
         //    Encontre o menor valor
         //    Calcule a média dos números lidos
 
-        int[] numeros = new int[10];
-
         Scanner sc = new Scanner(System.in);
 
-        for (int i = 0; i < numeros.length; i++) {
-            System.out.printf("Digite o %d° número inteiro: ", (i + 1));
-            validadaSystemIn(sc);
-            numeros[i] = sc.nextInt();
-        }
-
-        int numeroMaior = numeros[1];
-        int numeroMenor = numeros[1];
+        int numero = 0;
+        int numeroMaior = 0;
+        int numeroMenor = 0;
         int somatoria = 0;
 
-        for (int i = 0; i < numeros.length; i++) {
-            if (numeros[i] > numeroMaior) {
-                numeroMaior = numeros[i];
-            } else if (numeros[i] < numeroMenor) {
-                numeroMenor = numeros[i];
+        for (int i = 1; i <= 10; i++) {
+            System.out.printf("Digite o %d° número inteiro: ", (i + 1));
+            validadaSystemIn(sc);
+            numero = sc.nextInt();
+
+            if(i == 1){
+                numeroMaior = numero;
+                numeroMenor = numero;
             }
-            somatoria += numeros[i];
+
+            if (numero > numeroMaior) {
+                numeroMaior = numero;
+            } else if (numero < numeroMenor) {
+                numeroMenor = numero;
+            }
+            somatoria += numero;
         }
 
         int media = somatoria / 10;
