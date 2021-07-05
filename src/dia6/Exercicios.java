@@ -1,12 +1,34 @@
 package dia6;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Exercicios {
 
     public static void main(String[] args) {
-        sort();
+        long startTime = System.currentTimeMillis();
+        Instant start = Instant.now();
+
+        Random rd = new Random();
+        int[] arr = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = rd.nextInt();
+        }
+
+        Arrays.sort(arr);
+        //bubbleSort(arr);
+        //System.out.println(Arrays.toString(arr));
+
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+
+        Instant end = Instant.now();
+        System.out.println(Duration.between(start, end));
+
+        sortString();
     }
 
     public static void validadaSystemIn(Scanner sc) {
@@ -64,5 +86,67 @@ public class Exercicios {
         System.out.println(Arrays.toString(array));
 
     }
+
+    public static int[] selectSortPtBr(int[] vetor) {
+        int n = vetor.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            int indice_com_menor_valor = i;
+
+            for (int j = i + 1; j < n; j++) {
+                if (vetor[j] < vetor[indice_com_menor_valor]) {
+                    indice_com_menor_valor = j;
+                }
+            }
+
+            int temporario = vetor[indice_com_menor_valor];
+            vetor[indice_com_menor_valor] = vetor[i];
+            vetor[i] = temporario;
+        }
+
+        return vetor;
+    }
+
+    public static void selectSort(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 0; i < n; i++) {
+            int min_idx = i;
+
+            for (int j = i + 1; j < n; j++)
+                if (arr[j] < arr[min_idx])
+                    min_idx = j;
+
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    public static void bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+
+        }
+    }
+
+    public static void sortString() {
+        String[] palavras = {"Banana", "Maça", "Uva", "Amora", "Ameixa"};
+
+        System.out.println(Arrays.toString(palavras));
+
+        Arrays.sort(palavras);
+
+        System.out.println(Arrays.toString(palavras));
+    }
+
 
 }
