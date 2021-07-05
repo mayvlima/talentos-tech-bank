@@ -1,11 +1,11 @@
-package dia4;
+package dia3;
 
 import java.util.Scanner;
 
 public class Exercicios {
 
     public static void main(String[] args) {
-        exercicio2();
+        exercicio2ComRecursao();
     }
 
     public static void validadaSystemIn(Scanner sc) {
@@ -17,189 +17,82 @@ public class Exercicios {
     }
 
     public static void exercicio1() {
-        //Faça um programa que calcula o exponencial a partir de sua base e sua potência
+        //    Construa um algoritmo que leia 10 valores inteiros e positivos e:
+        //
+        //    Encontre o maior valor
+        //    Encontre o menor valor
+        //    Calcule a média dos números lidos
+        //    Esse exercício foi dado na aula 3 e agora vamos otimizar ele utilizando o while e for.
 
         Scanner sc = new Scanner(System.in);
 
-        int resultado = 1;
+        int numeroMaior = Integer.MIN_VALUE;
+        int numeroMenor = Integer.MAX_VALUE;
+        int somatoria = 0;
 
-        System.out.println("Qual será a base?");
-        validadaSystemIn(sc);
+        for (int i = 1; i <= 10; i++) {
+            System.out.printf("Digite o %d° número inteiro: ", (i));
+            validadaSystemIn(sc);
+            int numero = sc.nextInt();
 
-        int base = sc.nextInt();
+            if (numero > numeroMaior) {
+                numeroMaior = numero;
+            } else if (numero < numeroMenor) {
+                numeroMenor = numero;
+            }
 
-        System.out.println("Qual será a potência?");
-        validadaSystemIn(sc);
-
-        int potencia = sc.nextInt();
-
-        for (int i = 1; i <= potencia; i++) {
-            resultado *= base;
+            somatoria += numero;
         }
 
-       /* while(potencia >= 1){
-            resultado = resultado * base;
-            potencia--;
-        }*/
+        int media = somatoria / 10;
 
-        System.out.printf("O número %d na base %d é igual a = %d", base, potencia, resultado);
+        System.out.println("\nO MAIOR número é: " + numeroMaior);
+        System.out.println("O MENOR número é: " + numeroMenor);
+        System.out.println("A MÉDIA é : " + media);
 
         sc.close();
     }
 
     public static void exercicio2() {
-        exercicio2i();
-        exercicio2ii();
-        exercicio2iii();
-        exercicio2iv();
-        exercicio2v();
-        exercicio2vi();
-    }
+        //Construa um algoritmo usando uma estrutura de repetição que calcule o fatorial de um número.
 
-    public static void exercicio2i() {
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("Item i)");
+        System.out.print("Digite o número que você deseja saber o valor do seu fatorial: ");
+        validadaSystemIn(sc);
+        int numero = sc.nextInt();
 
-        for (int i = 0; i <= 4; i++) {
-            System.out.println("**********");
+        long resultado = 1;
+
+        while (numero > 1) {
+            resultado = numero * resultado;
+            numero--;
         }
 
+        System.out.printf("O fatorial é igual a  = %d", resultado);
+
+        sc.close();
+
     }
 
-    public static void exercicio2ii() {
-        System.out.println("\nItem ii)");
+    public static void exercicio2ComRecursao() {
+        Scanner sc = new Scanner(System.in);
 
-        int linhas = 5;
+        System.out.print("Digite o número que você deseja saber o valor do seu fatorial: ");
+        validadaSystemIn(sc);
+        int numero = sc.nextInt();
 
-        for (int i = 1; i <= linhas; i++) {
-            for (int j = 1; j <= i; j++) {
-                System.out.print("* ");
-            }
-            System.out.println("");
+        System.out.println(fatorialRecursivo(numero));
+
+        sc.close();
+    }
+
+    public static double fatorialRecursivo(int x) {
+        if (x == 0) {
+            return 1;
         }
+        return x * fatorialRecursivo(x - 1);
     }
 
-    public static void exercicio2iii() {
-        System.out.println("\nItem iii)");
-
-        int linhas = 5;
-
-        for (int i = 1; i <= linhas; i++) {
-
-            int k = linhas - i;
-
-            while (k > 0) {
-                System.out.print("  ");
-                k--;
-            }
-
-            for (int j = 1; j <= i; j++) {
-                System.out.print("* ");
-            }
-            System.out.print("\n");
-        }
-
-
-    }
-
-    public static void exercicio2iv() {
-        System.out.println("\nItem iv)");
-
-        int linhas = 5;
-
-        for (int i = 1; i <= linhas; i++) {
-
-            int espacos = linhas - i;
-
-            while (espacos > 0) {
-                System.out.print("  ");
-                espacos--;
-            }
-
-            int k = 0;
-
-            while (k != 2 * i - 1) {
-                System.out.print("* ");
-                k++;
-            }
-
-            System.out.print("\n");
-        }
-    }
-
-    public static void exercicio2v() {
-        System.out.println("\nItem v)");
-
-        int linhas = 5;
-
-        for (int i = 1; i <= linhas; i++) {
-
-            int espacos = linhas - i;
-
-            while (espacos > 0) {
-                System.out.print("  ");
-                espacos--;
-            }
-
-            int k = 0;
-            while (k != 2 * i - 1) {
-                System.out.printf("%d ", i);
-                k++;
-            }
-
-            System.out.print("\n");
-        }
-    }
-
-    public static void exercicio2vi() {
-        System.out.println("\nItem v)");
-
-        int linhas = 5;
-
-        for (int i = 1; i <= linhas; i++) {
-
-            int espacos = linhas - i;
-
-            while (espacos > 0) {
-                System.out.print("  ");
-                espacos--;
-            }
-
-            int k = 0;
-            int l = i;
-            boolean estaDecrementando = true;
-            while (k != 2 * i - 1) {
-
-                System.out.printf("%d ", l);
-                k++;
-
-                if(l > 1 && estaDecrementando ){
-                    l--;
-                }else{
-                    estaDecrementando = false;
-                    l++;
-                }
-            }
-
-            System.out.print("\n");
-        }
-    }
-
-    public static void exercicio2VIVirginia() {
-        int rows = 5;
-        System.out.println("");
-        for (int i = 1; i <= rows; i++) {
-            for (int j = 1; j <= (rows - i) * 2; j++) {
-                System.out.print(" ");
-            }
-            for (int k = i; k >= 1; k--) {
-                System.out.print(" " + k);
-            }
-            for (int l = 2; l <= i; l++) {
-                System.out.print(" " + l);
-            }
-            System.out.println();
-        }
-    }
 
 }

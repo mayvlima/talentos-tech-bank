@@ -1,82 +1,31 @@
-package dia3;
-
-import java.util.ArrayList;
-import java.util.List;
+package dia2;
 
 public class Main {
 
-    public static int metodoRecursivo(int i) {
-        if (i <= 10) {
-            return metodoRecursivo(i + 1);
-        }
-        return i;
-    }
-
     public static void main(String[] args) {
 
-        System.out.println("WHILE");
-        int contagem = 11;
 
-        while (contagem < 11) {
-            System.out.println(contagem);
-            contagem++;
-        }
-
-        System.out.println("DO WHILE");
-        contagem = 11;
-
-        do {
-            System.out.println(contagem);
-            contagem++;
-        } while (contagem < 11);
-
-
-        // Testando o do while
-
-        boolean condicao = true;
-
-        while (condicao) {
-            if (1 > 0) {
-                condicao = false;
-            }
-        }
-
-        do {
-            if (1 > 0) {
-                condicao = false;
-            }
-        } while (condicao);
-
-        System.out.println("FOR");
-
-        for (int i = 0; i <= 10; i++) {
-            System.out.println(i);
-        }
-
-        System.out.println("Iterando sobre uma lista com forEach");
-        List<Integer> minhaListaDeInteiros = new ArrayList<>();
-        minhaListaDeInteiros.add(1);
-        minhaListaDeInteiros.add(2);
-        minhaListaDeInteiros.add(3);
-
-        minhaListaDeInteiros.forEach(item -> {
-            System.out.println(item);
-        });
-
-        System.out.println("\nIterando sobre uma lista com o for convencional");
-        for (int i = 0; i < minhaListaDeInteiros.size(); i++) {
-            System.out.println(minhaListaDeInteiros.get(i));
-        }
-
-        System.out.println("\nIterando sobre uma lista com o for Each");
-        for (int x : minhaListaDeInteiros) {
-            System.out.println(x);
-        }
-
-        //Repetição com o método recursivo
-        //Cuidado, pode estourar a pilha de execução Java
-
-        System.out.println("Loop recursivo");
-        System.out.println(metodoRecursivo(1));
     }
+
+    public static void operadores() {
+        // Atribuição
+        int idade = 20;
+
+        int i = 1 + 1; // + - * / ++ -- %
+
+    }
+
+    public static void primeiroIf() {
+        int idade = 1000;
+        if (idade < 0) {
+            System.out.println("Idade inválida!");
+        } else if (idade >= 150) {
+            System.out.println("Idade inválida!");
+        } else if (idade >= 18) {
+            System.out.println("Você tem permissão para assistir esse conteúdo");
+        } else {
+            System.out.println("Você não tem permissão para assistir esse conteúdo");
+        }
+    }
+
 }
