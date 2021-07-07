@@ -239,7 +239,7 @@ public class Exercicios {
 
         while (tentativas > 0) {
             System.out.println("\nDigite uma letra: ");
-            String letra = sc.next().toUpperCase();
+            String letra = sc.next().toUpperCase().trim();
 
             int acertos = 0;
             letrasEscolhidas.add(letra);
@@ -276,10 +276,83 @@ public class Exercicios {
             System.out.println("\n*********************************");
         }
 
+        sc.close();
+
+    }
+
+    public static void exercicio5ResolucaoProfessor() {
+        // Escreva um algoritmo que simula um jogo da forca simples.
+        // o usuario precisara adivinhar uma palavra chutando cada letra em no máximo 10 chutes,
+        // caso o usuario acerte a letra o jogo dirá que ele acertou, caso tenha errado,
+        // o numero de tentativas vai diminuindo. Caso o numero de tentativas chegue a 0 o usuário perde.
+
+
+        Scanner in = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Jogador 1, escolha a palavra que deverá ser adivinhada!");
+        String palavraParaSerAdivinhadaInput = in.next();
+
+        System.out.println("Jogador 1, dê uma dica sobre a palavra");
+        String dicaDaPalavraParaSerAdivinhada = in.next();
+
+        palavraParaSerAdivinhadaInput = palavraParaSerAdivinhadaInput.trim();
+
+        int maximoDeChutes = 10;
+
+        char[] palavraParaSerAdivinhada = palavraParaSerAdivinhadaInput.toCharArray();
+
+
+        List<Boolean> listaDeLetrasAcertadas = new ArrayList<>();
+        for (char x : palavraParaSerAdivinhada) {
+            listaDeLetrasAcertadas.add(false);
+        }
+
+        System.out.println("Agora é a vez do jogador 2...");
+        System.out.printf("Sua dica é %s\n", dicaDaPalavraParaSerAdivinhada);
+
+        while (maximoDeChutes > 0 && listaDeLetrasAcertadas.contains(false)) {
+            System.out.println("Jogador 2, chute uma letra");
+            char chute = in.next().charAt(0);
+
+            boolean errouOhChute = true;
+            for (int i = 0; i < palavraParaSerAdivinhada.length; i++) {
+                if (chute == palavraParaSerAdivinhada[i]) {
+                    listaDeLetrasAcertadas.set(i, true);
+                    errouOhChute = false;
+                }
+            }
+
+            if (errouOhChute) {
+                maximoDeChutes--;
+                System.out.printf("Agora você só tem %s chutes\n", maximoDeChutes);
+            }
+
+            for (int i = 0; i < palavraParaSerAdivinhada.length; i++) {
+                if (listaDeLetrasAcertadas.get(i)) {
+                    System.out.printf("%s ", palavraParaSerAdivinhada[i]);
+                } else {
+                    System.out.print("_ ");
+                }
+            }
+            System.out.println();
+
+
+        }
+
+
+        System.out.println("------------------------------");
+        if (!listaDeLetrasAcertadas.contains(false)) {
+            System.out.println("Jogador 2 ganhou o jogo");
+        } else {
+            System.out.println("Jogador 1 ganhou o jogo");
+        }
+
+
+        in.close();
     }
 
     public static void main(String[] args) {
-        exercicio5();
+        exercicio5ResolucaoProfessor();
     }
 
 
