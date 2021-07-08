@@ -11,18 +11,14 @@ public class Desafio {
         int distanciaMenor = Integer.MAX_VALUE;
 
         for (int i = 0; i < numeros.length; i++) {
-
             if (Math.abs(numeros[i]) == Math.abs(distanciaMenor) && numeros[i] > distanciaMenor) {
                 distanciaMenor = numeros[i];
-            } else {
-                if (Math.abs(numeros[i]) < Math.abs(distanciaMenor)) {
+            } else if (Math.abs(numeros[i]) < Math.abs(distanciaMenor)){
                     distanciaMenor = numeros[i];
-                }
             }
-
         }
 
-        System.out.println(distanciaMenor);
+        System.out.printf("O valor mais proximo de zero é: %d", distanciaMenor);
     }
 
     public static void main(String[] args) {
