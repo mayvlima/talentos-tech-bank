@@ -1,4 +1,4 @@
-package dia8;
+package dia7;
 
 public class Desafio {
 

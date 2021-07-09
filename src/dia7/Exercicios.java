@@ -302,10 +302,7 @@ public class Exercicios {
         char[] palavraParaSerAdivinhada = palavraParaSerAdivinhadaInput.toCharArray();
 
 
-        List<Boolean> listaDeLetrasAcertadas = new ArrayList<>();
-        for (char x : palavraParaSerAdivinhada) {
-            listaDeLetrasAcertadas.add(false);
-        }
+        List<Boolean> listaDeLetrasAcertadas = new ArrayList<>(Collections.nCopies(palavraParaSerAdivinhada.length, false));
 
         System.out.println("Agora é a vez do jogador 2...");
         System.out.printf("Sua dica é %s\n", dicaDaPalavraParaSerAdivinhada);
