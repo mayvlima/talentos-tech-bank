@@ -27,9 +27,9 @@ public class Agenda {
 
     public void removePessoa(String nome, String numeroDoCelular) {
         Pessoa pessoaParaRemover = new Pessoa(nome, null, null, numeroDoCelular);
-        if(contatos.remove(pessoaParaRemover)){
+        if (contatos.remove(pessoaParaRemover)) {
             System.out.println("Contato removido com sucesso!\n");
-        }else{
+        } else {
             System.out.println("Contato com esses dados não encontrado!\n");
         }
     }
