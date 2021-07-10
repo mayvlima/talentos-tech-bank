@@ -1,8 +1,6 @@
 package dia8.exercicios;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class Agenda {
     //    Crie uma classe Agenda que pode armazenar 10 pessoas e que seja capaz de realizar as seguintes operações:
@@ -12,50 +10,58 @@ public class Agenda {
     //    void imprimeAgenda(); // imprime os dados de todas as pessoas da agenda
     //    void imprimePessoa(int index); // imprime os dados da pessoa que está na posição “i” da agenda.
 
-    List<Pessoa> contatos = new ArrayList<>();
+    private Set<Pessoa> contatos;
 
-    public void armazenaPessoa(String nome, int ano, float altura) {
+    public Agenda() {
+        this.contatos = new HashSet<>();
+    }
+
+    public void armazenaPessoa(String nome, Integer ano, Double altura, String numeroDeCelular) {
         if (contatos.size() < 10) {
-            contatos.add(new Pessoa(nome, ano, altura));
-            System.out.println("Cadastro realizado com sucesso!");
+            contatos.add(new Pessoa(nome, ano, altura, numeroDeCelular));
+            System.out.println("Cadastro realizado com sucesso!\n");
         } else {
-            System.out.println("Agenda Lotada!");
+            System.out.println("Agenda Lotada!\n");
         }
     }
 
-    public void removePessoa(String nome) {
-        int id = buscaPessoa(nome);
-        if (id != -1) {
-            contatos.remove(id);
-            System.out.println("Contato removido com sucesso!");
-        } else {
-            System.out.println("Contato não encontrado!");
+    public void removePessoa(String nome, String numeroDoCelular) {
+        Pessoa pessoaParaRemover = new Pessoa(nome, null, null, numeroDoCelular);
+        if(contatos.remove(pessoaParaRemover)){
+            System.out.println("Contato removido com sucesso!\n");
+        }else{
+            System.out.println("Contato com esses dados não encontrado!\n");
         }
     }
 
-    public int buscaPessoa(String nome) {
-        for (int i = 0; i < contatos.size(); i++) {
-            if (contatos.get(i).nome.toLowerCase(Locale.ROOT).equals(nome.toLowerCase(Locale.ROOT).trim())) {
-                return i;
+    public List<Pessoa> buscaPessoa(String nome) {
+        List<Pessoa> pessoasEncontradas = new ArrayList<>();
+
+        for (Pessoa pessoa : contatos) {
+            if (pessoa.getNome().contains(nome)) {
+                pessoasEncontradas.add(pessoa);
             }
         }
-        return -1;
+        return pessoasEncontradas;
     }
 
     public void imprimeAgenda() {
-        for (int i = 0; i < contatos.size(); i++) {
-            System.out.printf("ID: %d \n", i);
-            System.out.println(contatos.get(i).toString());
+        for (Pessoa pessoa : contatos) {
+            System.out.println(pessoa);
         }
     }
 
-    public void imprimePessoa(int index) {
-        if(index >= contatos.size()){
-            System.out.println("\nNão foi encontrado contato com esse número de ID!");
-        }else{
-            System.out.printf("\nID: %d \n", index);
-            System.out.println(contatos.get(index).toString());
-        }
+    public void listaBuscaDePessoasPeloNome(String nome) {
+        List<Pessoa> pessoasEncontradas = this.buscaPessoa(nome);
 
+        if (!pessoasEncontradas.isEmpty()) {
+            for (Pessoa pessoa : pessoasEncontradas) {
+                System.out.println(pessoa);
+            }
+        } else {
+            System.out.println("Contatos com esse nome não foram encontrados!\n");
+        }
     }
+
+
 }
