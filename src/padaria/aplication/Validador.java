@@ -1,4 +1,4 @@
-package padaria;
+package padaria.aplication;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class Validador {
         }
     }
 
-    public static String imputStringVazio(Scanner sc) {
+    public static String inputStringVazio(Scanner sc) {
         String s = sc.next();
         while (s.isEmpty()) {
             System.out.println("Você deve digitar um valor");

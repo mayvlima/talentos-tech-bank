@@ -1,11 +1,12 @@
-package padaria;
+package padaria.aplication;
 
+import padaria.DataBaseConnection;
 import padaria.dao.ItemVendaDao;
 import padaria.dao.ProdutoDao;
 import padaria.dao.VendaDao;
 
-import static padaria.Menu.*;
-import static padaria.Validador.*;
+import static padaria.aplication.Menu.*;
+import static padaria.aplication.Validador.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;

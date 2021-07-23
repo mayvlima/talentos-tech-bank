@@ -1,4 +1,4 @@
-package padaria;
+package padaria.aplication;
 
 import padaria.dao.ItemVendaDao;
 import padaria.dao.ProdutoDao;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static padaria.Validador.*;
+import static padaria.aplication.Validador.*;
 
 public class Menu {
 
@@ -44,7 +44,7 @@ public class Menu {
     public static void cadastrarProduto(ProdutoDao produtoDao, Scanner sc) throws SQLException {
 
         System.out.print("Digite o código de barras do produto: ");
-        String codigo = imputStringVazio(sc);
+        String codigo = inputStringVazio(sc);
 
         while (!Produto.verificarSeCodigoJaExiste(produtoDao, codigo)) {
             System.out.println("Esse código de barras já foi cadastrado!");
@@ -53,7 +53,7 @@ public class Menu {
         }
 
         System.out.print("Digite a descrição do produto: ");
-        String descricao = imputStringVazio(sc);
+        String descricao = inputStringVazio(sc);
 
         System.out.print("Digite o valor de custo: ");
         BigDecimal valorCusto = null;
@@ -86,29 +86,8 @@ public class Menu {
 
     }
 
-    public static void venda(Scanner sc, ProdutoDao produtoDao, VendaDao vendaDao, ItemVendaDao itemVendaDao) throws SQLException {
-        Venda venda = Venda.inicializarVenda(vendaDao);
 
-        int continuar = 1;
-
-        while (continuar == 1) {
-            List<Produto> resultado = buscarProdutosParaVenda(sc, produtoDao);
-            Produto produtoDesejado = selecionarProduto(resultado, sc);
-            realizarVenda(venda, itemVendaDao, produtoDesejado, sc);
-
-            System.out.println("Deseja adicionar mais um item?");
-            System.out.println("1 - Sim");
-            System.out.println("2 - Não");
-            continuar = sc.nextInt();
-
-            if (continuar == 2) {
-                confimarVenda(sc, venda, vendaDao);
-            }
-        }
-
-    }
-
-    public static void confimarVenda(Scanner sc, Venda venda, VendaDao vendaDao) throws SQLException {
+    public static void confirmarVenda(Scanner sc, Venda venda, VendaDao vendaDao) throws SQLException {
         System.out.println("Deseja confirmar a venda?");
         System.out.println("1 - Sim");
         System.out.println("2 - Não");
@@ -125,8 +104,11 @@ public class Menu {
 
     }
 
-    public static List<Produto> buscarProdutosParaVenda(Scanner sc, ProdutoDao produtoDao) throws SQLException {
+    public static void venda(Scanner sc, ProdutoDao produtoDao, VendaDao vendaDao, ItemVendaDao itemVendaDao) throws SQLException {
+        Venda venda = Venda.inicializarVenda(vendaDao);
+
         int opcao = 1;
+        boolean finalizar = true;
 
         List<Produto> resultadoBuscaProdutos = new ArrayList<>();
 
@@ -143,14 +125,29 @@ public class Menu {
                 System.out.println("2 - Sair");
                 opcao = sc.nextInt();
 
+                if(opcao == 2){
+                    venda.cancelarVenda(vendaDao);
+                    finalizar = false;
+                    System.out.println("Venda Cancelada");
+                }
 
             } else {
                 imprimirBusca(resultadoBuscaProdutos);
-                opcao = 2;
+                Produto produtoDesejado = selecionarProduto(resultadoBuscaProdutos, sc);
+                realizarVenda(venda, itemVendaDao, produtoDesejado, sc);
+
+                System.out.println("Deseja adicionar mais um item?");
+                System.out.println("1 - Sim");
+                System.out.println("2 - Não");
+                opcao = sc.nextInt();
+
             }
         }
 
-        return resultadoBuscaProdutos;
+        if(finalizar){
+            confirmarVenda(sc, venda, vendaDao);
+        }
+
     }
 
     public static Produto selecionarProduto(List<Produto> resultadoBuscaProdutos, Scanner sc) {
