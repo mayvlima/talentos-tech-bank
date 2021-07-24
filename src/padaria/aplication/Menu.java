@@ -145,6 +145,11 @@ public class Menu {
         }
 
         if(finalizar){
+
+            for(ItemVenda v : venda.getItens()){
+                System.out.println(v);
+            }
+
             confirmarVenda(sc, venda, vendaDao);
         }
 

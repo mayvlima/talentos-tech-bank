@@ -68,8 +68,7 @@ public class VendaDao {
     }
 
     public void cancelarVenda(Venda venda) throws SQLException {
-        String query = "delete from tb_item_venda where id = ?; delete from tb_venda where id = ?";
-
+        String query = "delete from tb_item_venda where id_venda = ?; delete from tb_venda where id = ?;";
 
         try (PreparedStatement updateVenda = conn.prepareStatement(query)) {
             int i = 0;

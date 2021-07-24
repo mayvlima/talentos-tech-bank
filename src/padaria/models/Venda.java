@@ -44,6 +44,10 @@ public class Venda {
         return dataHora;
     }
 
+    public List<ItemVenda> getItens() {
+        return itens;
+    }
+
     public static Venda inicializarVenda(VendaDao dao) throws SQLException {
         return dao.inicializarVenda();
     }
@@ -62,7 +66,6 @@ public class Venda {
     }
 
     public void cancelarVenda(VendaDao dao) throws SQLException {
-        // dao.finalizarVenda(this);
         dao.cancelarVenda(this);
     }
 
